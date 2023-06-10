@@ -53,6 +53,22 @@ const getEmpleado = (id, callback) =>{
 }
 // console.log(getEMpleado(5));
 
+
+// se realiza esta funcion llamada gerSalario. esta función es para obtener los salarios que se encuentran en algun array. la función se hace pensando en la misma logica como la que se hizo para encontrar los nombres de los empleados.
+
+// A su vez, en la parte final se llama a la función, eso setInterval, cumpliendo algunos parametros para que filtre en caso que no se obtengan los valores requeridos
+
+// acá un tip buenisimo
+// el null check operator es el signo de pregunta = ?. en ese signo podemos filtrar nulos
+const getSalario = (id, callback) =>{
+    const salario = salarios.find((s) => s.id === id)?.salario;
+    if(salario){
+        callback (null,salario);
+    } else{
+        callback (`salario no se encuentra para el empleado ${id}`);
+    }
+}
+
 getEmpleado(1, (err, empleado)=>{
     // arribita le agregamos un parámetro llamado "err" para hacer una condicional
 
@@ -61,7 +77,20 @@ getEmpleado(1, (err, empleado)=>{
        return console.log(err);
     }
     console.log('empleado existe')
-    console.log(empleado);
+    // en este console log podemos encontrar el nombre del empleado. acá se llama muy similar como se llaman los parametros en sql. primero se llama al arreglo, y despues se llama al parámetro que uno busca (que en si es como una variable)
+    console.log(empleado.nombre);
+
+    // acá se llama a la función getSalario, con los filtros respectivos :D
+getSalario(1, (err, salario)=>{
+    // arribita le agregamos un parámetro llamado "err" para hacer una condicional
+
+    if (err) {
+        console.log('error');
+       return console.log(err);
+    }
+    // console.log('empleado existe')
+    console.log('El empleado', empleado.nombre, 'tiene un salario de ', salario);
+})
 })
 
 // Nota interna:
