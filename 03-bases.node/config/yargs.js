@@ -16,6 +16,14 @@ const argv = require ('yargs')
         default: false,
         describe: 'Muestra la tabla en consola'
     })
+
+    // opcion para limitar
+    .option('h',{
+        alias: 'límite',
+        type: 'number',
+        default: 10,
+        describe: 'Este es el número hasta donde quieres la tabla'
+    })
     
     
     .check((argv,options)=>{

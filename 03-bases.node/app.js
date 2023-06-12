@@ -32,9 +32,11 @@ const [, base ] = arg3.split('=');
 
 
 // // función crearArchivo, que se encuentra en el archivo "multiplicar.js"
-crearArchivo(argv.b, argv.l)
+crearArchivo(argv.b, argv.l, argv.h)
 // y para asegurarnos que funcione bien vienen los respectivos then y catch
     .then(nombreArchivo => console.log(nombreArchivo, 'Creado'))
     .catch(err => console.log(err));
-
-
+    
+    // PARA EJECUTAR LA APP AÑADIR LO SIGUIENTE EN CONSOLA:
+    // node [ruta del archivo] app -b 10 -l -h 20
+    // esto es solo un ejemplo, y como resultado, arrojará la tabla del 10 en una lista hasta que llegue al 10x20 = 200
