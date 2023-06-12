@@ -8,6 +8,12 @@ const {crearArchivo} = require('./helpers/multiplicar');
 console.clear();
 
 //   Otra forma
-const base = 4;
+const base = 50;
 
-crearArchivo(base);
+// función crearArchivo, que se encuentra en el archivo "multiplicar.js"
+crearArchivo(base)
+// y para asegurarnos que funcione bien vienen los respectivos then y catch
+    .then(nombreArchivo => console.log(nombreArchivo, 'Creado'))
+    .catch(err => console.log(err));
+
+
