@@ -43,7 +43,7 @@ try {
         console.log(salida)
     
         // esta funcion por decirla de alguna manera ocupa node, siendo "fs" el parámetro de FileSystem. en conto esto lo que realiza es la creación de un archivo TXT que se llamará "tabla-5" y dentro de el archivo, se imprimirá la tabla de 5
-        fs.writeFileSync(`tabla-${base}`, salida);
+        fs.writeFileSync(`tabla-${base}.txt`, salida);
     
         return`tabla-${base}.txt creada`;
     }

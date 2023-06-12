@@ -1,4 +1,5 @@
 // esto es como lo normal que siempre se ha realizado para concatenar
+console.clear();
 console.log("esto es como lo normal que siempre se ha realizado para concatenar");
 const nombre = 'DeadPool';
 const real = 'Wade Winston';
@@ -35,3 +36,6 @@ const html= `
 
 `;
 console.log(html);
+
+
+// node --watch[ruta]

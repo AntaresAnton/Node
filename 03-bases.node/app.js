@@ -7,13 +7,24 @@
 const {crearArchivo} = require('./helpers/multiplicar');
 console.clear();
 
+
+
+// console.log(process.argv);
+// ahora realizaremos una desestructuración mediante una cachedDataVersionTag, ya que necesitamos el tercer argumento al invocar desde consola  '--base=5'
+// lo que queremos hacer con EventSource, es que el codigo quede automatizado, y podamos ingresar parámetros desde consola para crear el listado de tablas que deseemos
+const [ , ,arg3 =' base=5'] = process.argv;
+const [, base =5 ] = arg3.split('=');
+// console.log(base);
+
 //   Otra forma
-const base = 50;
+// const base = 50;
+
+
 
 // función crearArchivo, que se encuentra en el archivo "multiplicar.js"
 crearArchivo(base)
 // y para asegurarnos que funcione bien vienen los respectivos then y catch
-    .then(nombreArchivo => console.log(nombreArchivo, 'Creado'))
+    .then(nombreArchivo => console.log(nombreArchivo, ''))
     .catch(err => console.log(err));
 
 
