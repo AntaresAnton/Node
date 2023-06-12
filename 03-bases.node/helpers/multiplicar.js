@@ -55,7 +55,8 @@ try {
         
     
         // esta funcion por decirla de alguna manera ocupa node, siendo "fs" el parámetro de FileSystem. en conto esto lo que realiza es la creación de un archivo TXT que se llamará "tabla-5" y dentro de el archivo, se imprimirá la tabla de 5
-        fs.writeFileSync(`tabla-${base}.txt`, salida);
+        fs.writeFileSync(`./03-bases.node/salida/tabla-${base}.txt`, salida);
+        // sale mejor colocar la ruta precisa que ahorrarse un par de caracteres.
     
         return`tabla-${base}.txt creada`;
     }
