@@ -4,28 +4,18 @@
 //   }
 // con esto se importa la librería de FileSystem. ojo que la constante puede llevar cualquier nombre, el "require" debe ser si o si 'fs' dado que es parámetro de node
 // en la constante de abajo, se llama al archivo "multiplicar" y a la función "creararchivo" con sus rutas respectivas
-const { options } = require('yargs');
+const { options, demandOption } = require('yargs');
+// archivo importado de multiplicar.js
 const {crearArchivo} = require('./helpers/multiplicar');
-// console.clear();
-// con este codigo de abajo, llamamos a la librería Yargs
-const argv = require ('yargs')
-    .option('b', {
-        alias: 'base',
-        type: 'number',
-        demandOption: true
+// archivo importado de yargs.js
+const argv = require('./config/yargs')
 
-    })  .check((argv,options)=>{
-        // console.log('yargs', argv)
-        if (isNaN(argv.b)){
-            throw 'La base tiene que ser un número'
-        }
-         return true;
-    })
-        .argv;
+// acá anteriormente estaba lo que ahora está en el archivo "yargs"
+
 
 // console.log(process.argv);
-console.log(argv);
-console.log('Base yargs: ', argv.b);
+// console.log(argv);
+// console.log('Base yargs: ', argv.b);
 
 
 
@@ -42,7 +32,7 @@ const [, base ] = arg3.split('=');
 
 
 // // función crearArchivo, que se encuentra en el archivo "multiplicar.js"
-crearArchivo(argv.b)
+crearArchivo(argv.b, argv.l)
 // y para asegurarnos que funcione bien vienen los respectivos then y catch
     .then(nombreArchivo => console.log(nombreArchivo, 'Creado'))
     .catch(err => console.log(err));
