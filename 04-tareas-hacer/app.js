@@ -1,9 +1,12 @@
 // console.clear();
 // console.log('Inicio de programa');
 // para llamar a la libreria de los colores
+
+
 // se recomienda que primero vayan las importaciones de paquetes de terceros, y después las importaciones de archivos correspondientes a lo que uno está realizando
 require('colors');
-const {mostrarMenu,pausa} = require('./helpers/mensajes');
+// const {mostrarMenu,pausa} = require('./helpers/mensajes');
+const { inquirerMenu } = require('./helpers/inquirer');
 
 // haremos una constante main
 
@@ -18,15 +21,15 @@ const main = async()=>{
     // acá mientras "opt" sea diferente de cero, pero como String, se seguirá ejecutando el ciclo
     
     do {
-       opt = await mostrarMenu();
+       opt = await inquirerMenu();
        console.log({opt});
 
-       if (opt !== '0') {
-        await pausa();
-       }
+    //    if (opt !== '0') {
+    //     await pausa();
+    //    }
 
     } while (opt !== '0');
-
+    
 
 
     // pausa();
