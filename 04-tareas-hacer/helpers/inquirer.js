@@ -40,6 +40,7 @@ const preguntas = [
     }
 ]; //const preguntas
  
+// imprimir el menú
 const inquirerMenu = async ()=>{
     // console.clear();
     console.log('===================================='.green);
