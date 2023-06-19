@@ -38,7 +38,7 @@ const preguntas = [
             }
         ]
     }
-];
+]; //const preguntas
  
 const inquirerMenu = async ()=>{
     // console.clear();
@@ -48,10 +48,25 @@ const inquirerMenu = async ()=>{
 
     const {opcion} = await inquirer.prompt(preguntas);
     return opcion;
-}
+} //const inquirerMenu
+
+
+// con esta const lo que hacemos es poder ejecutar el texto que aparece más abajo, (? Presione enter para continuar)
+const pausa = async() =>{
+    const question = [
+        {
+            type: 'input',
+            name: 'enter',
+            message: `Presione ${'enter'.green} para continuar` 
+        }
+    ];
+    console.log('\n')
+    await inquirer.prompt(question)
+} // fin const pausa
 
 
 // esto para poder utilizar la función en otro archivo js
 module.exports={
-    inquirerMenu
+    inquirerMenu,
+    pausa
 }
