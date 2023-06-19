@@ -6,7 +6,12 @@
 // se recomienda que primero vayan las importaciones de paquetes de terceros, y después las importaciones de archivos correspondientes a lo que uno está realizando
 require('colors');
 // const {mostrarMenu,pausa} = require('./helpers/mensajes');
-const { inquirerMenu,pausa } = require('./helpers/inquirer');
+const { inquirerMenu,
+        pausa,
+        leerInput
+        } = require('./helpers/inquirer');
+// const Tarea = require('./models/tarea');
+const Tareas = require('./models/tareas');
 
 // haremos una constante main
 
@@ -17,12 +22,36 @@ const main = async()=>{
 
 
     let opt = '';
+    const tareas = new Tareas();
     // ciclo do while, para hacer el bucle de opciones. y al tener el parámetro correcto o deseado, se detenga
     // acá mientras "opt" sea diferente de cero, pero como String, se seguirá ejecutando el ciclo
     
     do {
        opt = await inquirerMenu();
-       console.log({opt});
+    //    console.log({opt});
+    // ************* solo de ejemplo *************
+    // const tareas = new Tareas();
+    // const tarea = new Tarea('Comprar comida');
+    // tareas._listado[tarea.id] = tarea;
+    // ************* solo de ejemplo *************
+    
+    switch (opt) {
+        case 1:
+            // crear opcion
+            const desc = await leerInput('Descripción: ');
+            // console.log(desc);
+            tareas.crearTarea(desc);
+            
+            break;
+
+        case 2:
+            console.log(tareas._listado);
+            break;
+
+    }
+    
+
+
 
     //    if (opt !== '0') {
     //     await pausa();

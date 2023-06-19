@@ -65,8 +65,29 @@ const pausa = async() =>{
 } // fin const pausa
 
 
+// nueva función para realizar prompts en el menu
+const leerInput = async(message)=>{
+    const question = [
+        {
+            type: 'input',
+            name: 'desc',
+            message,
+            // acá en el validate, se le agrega un if para forzar a que se ingresen caracteres, de lo contrario,si el campo queda vacío, arrojará error
+            validate(value){
+                if (value.length === 0 ) {
+                    return 'Por favor, ingrese un valor';
+                }
+                return true;
+            }
+        }
+    ];
+    const {desc} = await inquirer.prompt(question);
+    return desc;
+}
+
 // esto para poder utilizar la función en otro archivo js
 module.exports={
     inquirerMenu,
-    pausa
+    pausa,
+    leerInput
 }
