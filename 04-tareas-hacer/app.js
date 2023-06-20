@@ -5,6 +5,7 @@
 
 // se recomienda que primero vayan las importaciones de paquetes de terceros, y después las importaciones de archivos correspondientes a lo que uno está realizando
 require('colors');
+const { guardarDB,  leerDB } = require('./helpers/guardarArchivo');
 // const {mostrarMenu,pausa} = require('./helpers/mensajes');
 const { inquirerMenu,
         pausa,
@@ -23,6 +24,12 @@ const main = async()=>{
 
     let opt = '';
     const tareas = new Tareas();
+    const tareasDB = leerDB();
+
+    if (tareasDB){
+        //establecer las tareas
+    }
+    await pausa();
     // ciclo do while, para hacer el bucle de opciones. y al tener el parámetro correcto o deseado, se detenga
     // acá mientras "opt" sea diferente de cero, pero como String, se seguirá ejecutando el ciclo
     
@@ -45,18 +52,18 @@ const main = async()=>{
             break;
 
         case 2:
-            console.log(tareas._listado);
+            console.log(tareas.listadoArr);
             break;
 
     }
     
 
-
+    // guardarDB(tareas.listadoArr);
 
     //    if (opt !== '0') {
     //     await pausa();
     //    }
-    await pausa();
+    
 
     } while (opt !== '0');
     
