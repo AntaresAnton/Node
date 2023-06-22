@@ -104,6 +104,13 @@ const listadoTareasBorrar = async(tareas = [])=>{
 
     });
     // console.log(choices); 
+
+    // esto es para devolverse y no borrar nada
+    choices.unshift({
+        value: '0',
+        name: '0.'.green + 'cancelar'
+        
+    });
     
     const preguntas = [
         {
@@ -122,12 +129,12 @@ const confirmar = async(message)=>{
 
     const question = [
         {
-            type: 'confirm',
-            name: 'ok',
-            message
+            type: 'confirm', // yes | no
+            name: 'ok', // imprime un ol
+            message // al estar vacío se concatena con el ok del archivo app (ver "case 6" en el archivo app)
         }
     ];
-    const {ok} = await  inquirer.prompt(question);
+    const {ok} = inquirer.prompt(question);
     return ok;
 }
 

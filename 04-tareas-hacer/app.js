@@ -10,7 +10,8 @@ const { guardarDB,  leerDB } = require('./helpers/guardarArchivo');
 const { inquirerMenu,
         pausa,
         leerInput,
-        listadoTareasBorrar
+        listadoTareasBorrar,
+        confirmar
         } = require('./helpers/inquirer');
 // const Tarea = require('./models/tarea');
 const Tareas = require('./models/tareas');
@@ -75,9 +76,15 @@ const main = async()=>{
 
         case 6: // Borrar
         const id = await listadoTareasBorrar(tareas.listadoArr);
+        // if (id !== '0'){}
         const ok = await confirmar('¿Está Seguro?');
         // TODO: preguntar si está seguro
-        console.log({id});
+        // console.log({ok});
+
+        if (ok){
+            tareas.borrarTarea(id);
+            console.log('Tarea borrada correctamente')
+        }
         
         break;
 
@@ -94,3 +101,6 @@ const main = async()=>{
 }
 
 main();
+
+
+
