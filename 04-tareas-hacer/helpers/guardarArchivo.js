@@ -20,13 +20,17 @@ const guardarDB = (data)=>{
 const leerDB = ()=>{
     
     // en esta condicionante, lo que quiere decir es que si el archivo json no existe, el programa no devolverá nada (que es como obvio jaja)
+    // acá siempre que se agreguen funcionalidades de la librería FileSystemDirectoryEntry,se debe agregar el "path" del archivo
     if (!fs.existsSync(archivo)) {
         return null;
     }
     // de lo contrario, el sistema debe leerlo, interpretarlo como un archivo en formato utf-8
     const info = fs.readFileSync(archivo, {encoding: 'utf-8'});
-    console.log(info);
-    return null;
+    // la const data tiene un parámetro que dice json.parse. esto es para que se muestre el objeto con los corchetes (se convierta en un arreglo)
+    const data = JSON.parse(info);
+    // console.log(data);
+    // acá igual se retorna null
+    return data;
 
 }
 

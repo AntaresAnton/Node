@@ -4,6 +4,15 @@ const Tarea = require('./tarea');
 class Tareas{
     _listado = {};
 
+    cargarTareasFromArray(tareas = []){
+
+        tareas.forEach(tarea=>{
+            this._listado[tarea.id] = tarea;
+
+        })
+        
+    }
+
     // acá en js también existen los getter and setter como en java
     // se escribe como si fuera una función
     get listadoArr(){
@@ -24,10 +33,65 @@ class Tareas{
         this._listado = {};
     }
 
+    borrarTarea(id = ''){
+        if(this._listado[id]){
+            delete this._listado[id];
+        }
+    }
+
+    
+
+
     crearTarea(desc = ''){
         const tarea = new Tarea(desc);
 
         this._listado[tarea.id] = tarea;
     }
+
+    // esto es para obtener de manera ordenada el listado de tareas al presionarl la segunda opción
+    listadoCompleto(){
+        console.log();
+        this.listadoArr.forEach((tarea,i)=>{
+            const idx = `${i+1}`.green;
+            // console.log(idx);
+            const {desc, completadoEn} = tarea;
+            const estado = (completadoEn)
+                    ?'Completada'.green
+                    : 'Pendiente'.red;
+
+            console.log(`${idx} ${desc} :: ${estado}`)
+            
+        });
+    }
+
+    listarPendientesCompletadas(completadas = true){
+        console.log();
+        let contador = 0;
+        this.listadoArr.forEach(tarea=>{
+            // console.log(idx);
+            const {desc, completadoEn} = tarea;
+            const estado = (completadoEn)
+                    ?'Completada'.green
+                    : 'Pendiente'.red;
+
+
+                    if (completadas){
+                        // mostrar completados
+                        if(completadoEn){
+                            contador +=1;
+                            console.log(`${(contador + '.').green} ${desc} :: ${completadoEn}`);
+
+                        }
+                    }else{
+                        // mostrar pendientes
+                        if(!completadoEn){
+                            contador +=1;
+                            console.log(`${(contador + '.').green} ${desc} :: ${estado}`);
+                    }
+                }
+            
+        });
+    }
+
 }
 module.exports = Tareas;
