@@ -131,13 +131,13 @@ const confirmar = async(message)=>{
             message // al estar vacío se concatena con el ok del archivo app (ver "case 6" en el archivo app)
         }
     ];
-    const {ok} = inquirer.prompt(question);
+    // me habia faltado un await :0 / 23-05-2023
+
+    // como ayudamemorias.. el async await sirve para expresar funciones asíncronas. acá en js, hay un par de conceptos que tienen que ver con asincronías y promesas. estas se utilizan para recibir datos, pero no de manera fluida, es como por ejemplo cuando envías un mensaje de whatsapp y no lo abres. eso se interpreta como una promesa. pero al abrirlo 5 min después se comple una asincronía, por que no fué inmediato.
+    // cacheichon? xd
+    const {ok} = await inquirer.prompt(question);
     return ok;
 }
-
-
-
-
 const mostrarListadoChecklist = async (tareas = [])=>{
 
     // el metodo map lo que hace es retornar un nuevo arreglo, pero transformando a los hijos de este arreglo
@@ -165,10 +165,6 @@ const mostrarListadoChecklist = async (tareas = [])=>{
     return ids;
 
 }
-
-
-
-
 // esto para poder utilizar la función en otro archivo js
 module.exports={
     inquirerMenu,

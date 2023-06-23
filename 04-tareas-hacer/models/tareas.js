@@ -2,16 +2,12 @@
 const Tarea = require('./tarea'); 
 // se crea una clase llamada Tareas. esta clase almacenará un listado, dicho listado y sus config estarán en el archivo "tarea.js"
 class Tareas{
-    _listado = {};
+    // esto me habia faltado tambien
+    _listado = {
+        'abc': 123
+    };
 
-    cargarTareasFromArray(tareas = []){
-
-        tareas.forEach(tarea=>{
-            this._listado[tarea.id] = tarea;
-
-        })
-        
-    }
+    
 
     // acá en js también existen los getter and setter como en java
     // se escribe como si fuera una función
@@ -37,6 +33,15 @@ class Tareas{
         if(this._listado[id]){
             delete this._listado[id];
         }
+    }
+
+    cargarTareasFromArray(tareas = []){
+
+        tareas.forEach(tarea=>{
+            this._listado[tarea.id] = tarea;
+
+        })
+        
     }
 
 
