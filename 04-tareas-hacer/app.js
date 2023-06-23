@@ -83,11 +83,11 @@ const main = async()=>{
 
         if (ok){
             tareas.borrarTarea(id);
-            console.log('Tarea borrada correctamente')
+            console.log('Tarea borrada correctamente');
         }
         
+        
         break;
-
     }
     
     // esta función es la que se encarga de realizar el archivo json y dejarlo guardado en la carpeta "db"

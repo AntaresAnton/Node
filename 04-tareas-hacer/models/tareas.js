@@ -39,8 +39,6 @@ class Tareas{
         }
     }
 
-    
-
 
     crearTarea(desc = ''){
         const tarea = new Tarea(desc);
