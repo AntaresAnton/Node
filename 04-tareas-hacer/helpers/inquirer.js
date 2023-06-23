@@ -90,7 +90,7 @@ const leerInput = async(message)=>{
 
 // se crea el método para borrar las Tareas. esto se realizará casi de la misma forma que arriba
 
-const listadoTareasBorrar = async(tareas = [])=>{
+const listadoTareasBorrar = async (tareas = [])=>{
 
     // el metodo map lo que hace es retornar un nuevo arreglo, pero transformando a los hijos de este arreglo
     const choices = tareas.map((tarea,i)=>{
@@ -100,15 +100,13 @@ const listadoTareasBorrar = async(tareas = [])=>{
             value: tarea.id,
             name : `${idx} ${tarea.desc}`
         }
-        
-
     });
     // console.log(choices); 
 
     // esto es para devolverse y no borrar nada
     choices.unshift({
         value: '0',
-        name: '0.'.green + 'cancelar'
+        name: '0.'.green + 'Cancelar'
         
     });
     
@@ -138,11 +136,46 @@ const confirmar = async(message)=>{
     return ok;
 }
 
+
+
+
+const mostrarListadoChecklist = async (tareas = [])=>{
+
+    // el metodo map lo que hace es retornar un nuevo arreglo, pero transformando a los hijos de este arreglo
+    const choices = tareas.map((tarea,i)=>{
+
+        const idx = `${i+1}.`.green;
+        return {
+            value: tarea.id,
+            name : `${idx} ${tarea.desc}`,
+            checked: (tarea.completadoEn)? true : false
+        }
+    });
+    // console.log(choices); 
+
+    
+    const pregunta = [
+        {
+            type: 'checkbox',
+            name: 'ids',
+            message: 'Selecciones',
+            choices
+        }
+    ]
+    const {ids} = await inquirer.prompt(pregunta);
+    return ids;
+
+}
+
+
+
+
 // esto para poder utilizar la función en otro archivo js
 module.exports={
     inquirerMenu,
     pausa,
     leerInput,
     listadoTareasBorrar,
-    confirmar
+    confirmar,
+    mostrarListadoChecklist
 }

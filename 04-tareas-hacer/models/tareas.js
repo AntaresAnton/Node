@@ -77,7 +77,7 @@ class Tareas{
                         // mostrar completados
                         if(completadoEn){
                             contador +=1;
-                            console.log(`${(contador + '.').green} ${desc} :: ${completadoEn}`);
+                            console.log(`${(contador + '.').green} ${desc} :: ${completadoEn.green}`);
 
                         }
                     }else{
@@ -88,6 +88,23 @@ class Tareas{
                     }
                 }
             
+        });
+    }
+
+    toggleCompletadas(ids =[]){
+        ids.forEach( id =>{
+            // lo bueno d etrabajar con objetos, como menciona el Video es por que es más facil buscar cosas de un arreglo
+            const tarea = this._listado[id];
+            if(!tarea.completadoEn){
+                // en esta parte lo que se hace es que la fecha de la sección completada quede de acuerdo al iso general. dia/hora/min/seg/
+                tarea.completadoEn =  new Date().toISOString()
+            }
+        });
+
+        this.listadoArr.forEach(tarea =>{
+            if(!ids.includes(tarea.id)){
+                this._listado[tarea.id].completadoEn = null;
+            }
         });
     }
 
