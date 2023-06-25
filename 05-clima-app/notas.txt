@@ -1,0 +1,2 @@
+para comenzar con el pqte json
+npm init -y
