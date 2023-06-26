@@ -23,3 +23,7 @@ Por favor abran y tengan a la mano los siguientes enlaces que necesitaremos:
 https://www.mapbox.com/
 
 https://docs.mapbox.com/api/search/geocoding/
+
+
+token
+MAPBOX_KEY=pk.eyJ1IjoiYW50YXJlc2Rlc21hZHJlIiwiYSI6ImNsamMzaWttNjBwcGwzZXFoMXBoZjZ1NmEifQ.PcXhRmQZ09fqOIA5tbN2Vw
