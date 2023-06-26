@@ -34,11 +34,15 @@ const main = async () => {
                     const id = await listarLugares(lugares);
                     // este if lo que hace es que no genere un error en la app al cancelar una busquedas. para probarlo, sólo deben dejarlo comentado, buscar un lugar y cancelar. verán el error
                     if (id=== '0') continue
+
                     const lugarSel = lugares.find( l => l.id === id );
                     // console.log(lugarSel);
+                    
+                    // guardar en DB:
+                    busquedas.agregarHistorial( lugarSel.nombre )
+
 
                     // Clima
-
                     // con esta constante hacemos lo siguiente. de la página de busquedas, llamamos a la func "climaLugar" en dicha función verán que hay 2 parámetros (latitud y longitud) y lo que hace esta const de abajo es enviar la latitud y longitud que nos proporciona mapbox (mediante lugarSet =lat y lng correspondientemente) haciendo que openweather nos entregue el clima de las coordenadas solicitadas :D
                     const clima = await busquedas.climaLugar(lugarSel.lat,lugarSel.lng );
                     // console.log(clima);
