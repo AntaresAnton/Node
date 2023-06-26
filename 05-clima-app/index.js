@@ -32,29 +32,35 @@ const main = async () => {
                     
                     // seleccionar el lugar
                     const id = await listarLugares(lugares);
+                    // este if lo que hace es que no genere un error en la app al cancelar una busquedas. para probarlo, sólo deben dejarlo comentado, buscar un lugar y cancelar. verán el error
+                    if (id=== '0') continue
                     const lugarSel = lugares.find( l => l.id === id );
-                    console.log(lugarSel);
+                    // console.log(lugarSel);
 
                     // Clima
 
+                    // con esta constante hacemos lo siguiente. de la página de busquedas, llamamos a la func "climaLugar" en dicha función verán que hay 2 parámetros (latitud y longitud) y lo que hace esta const de abajo es enviar la latitud y longitud que nos proporciona mapbox (mediante lugarSet =lat y lng correspondientemente) haciendo que openweather nos entregue el clima de las coordenadas solicitadas :D
+                    const clima = await busquedas.climaLugar(lugarSel.lat,lugarSel.lng );
+                    // console.log(clima);
+
                     // Mostrar resultados
-                    console.log('\nInformación de la ciudad\n'.green);
+                    console.clear()
+                    console.log('==================================='.green)
+                    console.log('     Información de la ciudad');
+                    console.log('==================================='.green)
                     console.log(`Ciudad: ${lugarSel.nombre.green}`);
                     console.log(`Lat:`,lugarSel.lat);
-                    console.log(`Long:`,lugarSel.lat)
-                    console.log('Temperatura:, ')
-                    console.log('Mínima:, ')
-                    console.log('Máxima:, ')
+                    console.log(`Long:`,lugarSel.lng)
+                    console.log(`Temperatura: `,clima.temp,'°C'.yellow)
+                    console.log(`Mínima: `,clima.min,'°C'.yellow)
+                    console.log(`Máxima: `,clima.max,'°C'.yellow)
+                    console.log(`Como está el clima, ${clima.desc.green}`)
+                    console.log(`Punto de referencia: ${clima.puntocercano.green}`)
                     // fin opción uno 
                 break;
             case 2:
+                    // historial
 
-                break;
-            case 3:
-
-                break;
-
-            default:
                 break;
         }
 

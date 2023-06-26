@@ -27,3 +27,5 @@ https://docs.mapbox.com/api/search/geocoding/
 
 token
 MAPBOX_KEY=pk.eyJ1IjoiYW50YXJlc2Rlc21hZHJlIiwiYSI6ImNsamMzaWttNjBwcGwzZXFoMXBoZjZ1NmEifQ.PcXhRmQZ09fqOIA5tbN2Vw
+
+2979dab858d6a44f156a8cda74766124

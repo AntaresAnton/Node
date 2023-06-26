@@ -48,6 +48,57 @@ class Busquedas {
             
         }
     }
+        // parámetros para interactuar con la API. para "desectructurar" la api, sirve el postman, así uno puede ver que caracteristicas extraer, y hacer dinámica la api
+        // https://api.openweathermap.org/data/2.5/weather?lat=70.65045&lon=33.437776&appid=2979dab858d6a44f156a8cda74766124&lang=es&units=metric
+    get paramsWeather(){
+        return{
+            'appid': process.env.WEATHER_KEY, //token de acceso generado en Weather
+            'lang': 'es', //idioma de los resultados
+            'units': 'metric',
+        } 
+    }
+
+    // esto es para obtener los datos meteorológicos de la api del clima. así la primera api, nos arrona las coordenadas exactias, y realiza el llamado a la api de clima
+    async climaLugar(lat,lon){
+
+        try {
+            
+
+            //instance axios.create
+            //resp data
+            const instaceClima = axios.create({
+                baseURL: 'https://api.openweathermap.org/data/2.5/weather',
+                params: {...this.paramsWeather,lat,lon},
+            });
+
+            const result = await instaceClima.get();
+            // console.log(result);
+            const {weather, main,name} = result.data;
+            return {
+                desc: weather[0].description,
+                min: main.temp_min,
+                max: main.temp_max,
+                temp: main.temp,
+                humedad: main.humidity,
+                puntocercano: name,
+            }
+            
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
+    agregarHistorial(lugar = ''){
+        //TODO: prevenir duplicidad al guardar
+
+        this.historial.unshift(lugar);
+
+        // guardar en DB
+
+    }
+
 }
 
 
