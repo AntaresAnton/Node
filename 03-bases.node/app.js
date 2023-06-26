@@ -24,7 +24,7 @@ const argv = require('./config/yargs')
 // lo que queremos hacer con EventSource, es que el codigo quede automatizado, y podamos ingresar parámetros desde consola para crear el listado de tablas que deseemos
 const [ , ,arg3] = process.argv;
 const [, base ] = arg3.split('=');
-// console.log(base);
+console.log(base);
 
 //   Otra forma
 // const base = 50;
