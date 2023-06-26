@@ -1,9 +1,13 @@
+// se importa FileSystemWritableFileStream, para guardar datos en DB
+const fs = require('fs');
 // se usará una librería llamada "axios". esta librería o paquete de node, sirve para poder realizar llamados a apis
 const axios = require('axios');
 // recordar... las clases van UpperCamelCase
 class Busquedas {
     // array para el historial
-    historial = ['Tegucigalpa', 'Madrid', 'San José'];
+    historial = [];
+    // path o ruta de la base de datos
+    dbPath = './db/database.json'
 
     constructor(){
         // TODO: Leer DB en caso que exista
@@ -91,11 +95,27 @@ class Busquedas {
     }
 
     agregarHistorial(lugar = ''){
-        //TODO: prevenir duplicidad al guardar
+        
+        if(this.historial.includes(lugar.toLowerCase())){
+            return ;
+        }
 
-        this.historial.unshift(lugar);
+        this.historial.unshift(lugar.toLowerCase());
 
         // guardar en DB
+        this.guardarDB();
+    }
+    
+    guardarDB(){
+
+        const payload = {
+            historial: this.historial
+        };
+
+        fs.writeFileSync(this.dbPath, JSON.stringify(payload))
+    }
+
+    leerDB(){
 
     }
 

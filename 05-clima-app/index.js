@@ -39,7 +39,7 @@ const main = async () => {
                     // console.log(lugarSel);
                     
                     // guardar en DB:
-                    busquedas.agregarHistorial( lugarSel.nombre )
+                    busquedas.agregarHistorial( lugarSel.nombre );
 
 
                     // Clima
@@ -64,7 +64,10 @@ const main = async () => {
                 break;
             case 2:
                     // historial
-
+                    busquedas.historial.forEach((lugar,i) =>{
+                        const idx = `${i+1}.`.green;
+                        console.log(`${idx} ${lugar}`);
+                    });
                 break;
         }
 
