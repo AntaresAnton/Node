@@ -11,6 +11,8 @@ class Busquedas {
 
     constructor(){
         // TODO: Leer DB en caso que exista
+        this.leerDB();
+
     }
 
     get paramsMapbox(){
@@ -61,6 +63,16 @@ class Busquedas {
             'units': 'metric',
         } 
     }
+    get historialCapitalizado(){
+        // capitalizar las palabras del historial
+        // primero, el map regresa desestructurados los arreglos que estén en el historial (linea 8)
+        return this.historial.map(lugar =>{
+            let palabras = lugar.split(' ');
+            palabras = palabras.map(p => p[0].toUpperCase() +  p.substring(1));
+            return palabras.join(' ');
+        });
+    }
+
 
     // esto es para obtener los datos meteorológicos de la api del clima. así la primera api, nos arrona las coordenadas exactias, y realiza el llamado a la api de clima
     async climaLugar(lat,lon){
@@ -97,8 +109,11 @@ class Busquedas {
     agregarHistorial(lugar = ''){
         
         if(this.historial.includes(lugar.toLowerCase())){
-            return ;
+            return;
         }
+
+        // esta condicionante es sólo para mantener 6 registros en el historial de Busquedas. ahi se puede editar o dejar comentada para que guarde todos los registros
+        this.historial = this.historial.splice(0,5)
 
         this.historial.unshift(lugar.toLowerCase());
 
@@ -115,9 +130,23 @@ class Busquedas {
         fs.writeFileSync(this.dbPath, JSON.stringify(payload))
     }
 
+    
     leerDB(){
 
+        // debe de existir
+        if (!fs.existsSync(this.dbPath)) return;
+        
+        // en esta condicionante, lo que quiere decir es que si el archivo json no existe, el programa no devolverá nada (que es como obvio jaja)
+    // acá siempre que se agreguen funcionalidades de la librería FileSystemDirectoryEntry,se debe agregar el "path" del archivo
+        // const info readfilesync path - encoding: utf-8
+        const info = fs.readFileSync(this.dbPath, {encoding: 'utf-8'});
+        // const data = JSON.(info)
+         const data = JSON.parse(info);
+        //  se le colocó data historial ya que el json tiene un parámetro principal, que se llama this.historial. 
+        this.historial =  data.historial;
+       
     }
+    
 
 }
 

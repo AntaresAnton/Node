@@ -28,9 +28,10 @@ const leerDB = ()=>{
     const info = fs.readFileSync(archivo, {encoding: 'utf-8'});
     // la const data tiene un parámetro que dice json.parse. esto es para que se muestre el objeto con los corchetes (se convierta en un arreglo)
     const data = JSON.parse(info);
-    // console.log(data);
+    console.log(data);
     // acá igual se retorna null
     return data;
+    
 
 }
 
