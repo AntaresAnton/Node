@@ -19,7 +19,7 @@ class Busquedas {
 
     // función asíncrona para almacenar el lugar. este al ser string se le añaden las comillas simples
     async ciudad(lugar = ''){
-
+        // try catch para el tema de la api. recordar que se deben hacer try catch por el tema de solventar errores en caso que la api u otra cosa lo genere.
         try {
             // peticion HTTP
         // console.log('Ciudad', lugar);
@@ -31,18 +31,22 @@ class Busquedas {
 
             const resp = await instance.get();
 
-
         // const resp = await axios.get('')
-        console.log(resp.data);
+        // porsiacaso, esto se saca del arreglo de la API. recuerden que los json al ser arreglos (literalmente hablando jaja) vienen "encasillados" con llaves y descripciones (arreglo del arreglo del arreglo y asi). acá lo que se hace es sacar todos los datos que contiene el "objeto" Features. lo cual son las caracteristicas de cada ciudad en cuanto a clima
+        return resp.data.features.map(lugar =>({
+            // la función map lo que hace es obtener datos de `arreglos de arreglos` esto es como sacar cajas de una caja que dentro tiene otra caja jaja
+            id: lugar.id,
+            nombre: lugar.place_name,
+            lng: lugar.center[0],
+            lat: lugar.center[1],
+        }));
+
+
         } catch (error) {
             console.log('No se encontró nada')
-            return []; //retornar los lugaresque coincidan con el string que se ingresará
+            return []; //retornar los lugares que coincidan con el string que se ingresará
             
         }
-
-        
-
-
     }
 }
 

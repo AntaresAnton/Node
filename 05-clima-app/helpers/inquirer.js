@@ -74,15 +74,15 @@ const leerInput = async(message)=>{
 
 // se crea el método para borrar las Tareas. esto se realizará casi de la misma forma que arriba
 
-const listadoTareasBorrar = async (tareas = [])=>{
+const listarLugares = async (lugares = [])=>{
 
     // el metodo map lo que hace es retornar un nuevo arreglo, pero transformando a los hijos de este arreglo
-    const choices = tareas.map((tarea,i)=>{
+    const choices = lugares.map((lugar,i)=>{
 
         const idx = `${i+1}.`.green;
         return {
-            value: tarea.id,
-            name : `${idx} ${tarea.desc}`
+            value: lugar.id,
+            name : `${idx} ${lugar.nombre}`
         }
     });
     // console.log(choices); 
@@ -93,12 +93,12 @@ const listadoTareasBorrar = async (tareas = [])=>{
         name: '0.'.green + 'Cancelar'
         
     });
-    
+    // en este arreglo van un par de preguntas que nos permite manipular de manera interactiva el inquirer
     const preguntas = [
         {
             type: 'list',
             name: 'id',
-            message: 'Borrar',
+            message: 'Seleccione lugar',
             choices
         }
     ]
@@ -155,7 +155,7 @@ module.exports={
     inquirerMenu,
     pausa,
     leerInput,
-    listadoTareasBorrar,
-    confirmar,
-    mostrarListadoChecklist
+    // confirmar,
+    // mostrarListadoChecklist,
+    listarLugares
 }
