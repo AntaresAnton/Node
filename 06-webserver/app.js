@@ -1,25 +1,19 @@
-// se crea la constante http
-const http = require ('http');
+const express = require('express');
+const app = express();
+const port = 4000;
+// los app get con express sirven para realizar "rutas", esto quiere decir que podemos condicionar las rutas respectivas para nuestra app. como se ve en los ejemplos de abajo, podemos ir personalizando cada enlace, al final hay un comodín ('*') asterisco, que sirve para dejar un mensaje en cualquier ruta que no exista.
+app.get('/', function (req, res) {
+    res.send('Home Page')
+  });
 
-// un callback que disparará diferentes argumentos, el request y el response, por ejemplo
-http.createServer( (req,res) =>{
-    // notas: request es lo que se está solicitando por parte del cliente. 
-    // Response es lo que yo le responderé una vez procesado el request
+app.get('/hola-mundo', function (req, res) {
+  res.send('Hola Mundo en su respectiva ruta')
+});
 
-    // console.log(req);
-    // con lo de abajo se realiza el archivo en formato CSSMathValue, que se llamará "lista"
-    res.setHeader('Content-Disposition', 'attachment; filename=Lista.csv');
-    res.writeHead(200, {'Content-Type': 'application/csv'});
-    // res.writeHead(200, {'Content-Type': 'application/json'})
+app.get('*', function (req, res) {
+    res.send('404 | Page Not Found')
+  });
 
-
-    res.write('id, nombre \n');
-    res.write('1, Patrick \n');
-    res.write('2, María \n');
-    res.write('3, Juan \n');
-    res.write('4, Pedro \n');
-    res.end();
-})
-// el listen es para colocar el puerto donde uno "jugará" con la app
-.listen(4000);
-console.log('escuchando en el puerto', 4000);
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
