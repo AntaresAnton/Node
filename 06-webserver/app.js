@@ -1,11 +1,14 @@
 // Usando express
 const express = require('express');
+const hbs = require('hbs');
+require('dotenv').config();
 const app = express();
 // la constante port se deja así ya que en caso de tener conflictos con puertos, sólo se modifica la const y no hay que modificar nada más
-const port = 8080;
+const port = process.env.PORT;
 
 // usaremos handlebars
 app.set('view engine', 'hbs');
+hbs.registerPartials(__dirname + '/views/partials');
 
 
 // servir contenido estático - middleware
@@ -17,17 +20,26 @@ app.use(express.static('public'));
 // los app get con express sirven para realizar "rutas", esto quiere decir que podemos condicionar las rutas respectivas para nuestra app. como se ve en los ejemplos de abajo, podemos ir personalizando cada enlace, al final hay un comodín ('*') asterisco, que sirve para dejar un mensaje en cualquier ruta que no exista.
 app.get('/', function (req, res) {
   // ahora se renderizará la vista que está en la carpeta views, especificamente el home.hbs
-  res.render('home')
+  res.render('home', {
+      nombre: 'Patricio Quintanilla',
+      titulo: 'Examen Transversal Programación Web'
+  });
 });
 
 // llamado al menu generic
 app.get('/generic', function (req, res) {
-  res.sendFile(__dirname + '/public/generic.html');
+  res.render('generic',{
+    nombre: 'Patricio Quintanilla',
+    titulo: 'Página Generic'
+  });
 });
 
 // llamado al menú elements
 app.get('/elements', function (req, res) {
-  res.sendFile(__dirname + '/public/elements.html');
+  res.render('elements',{
+    nombre: 'Patricio Quintanilla',
+    titulo: 'Página Elements'
+  });
 });
 
 app.get('*', function (req, res) {
