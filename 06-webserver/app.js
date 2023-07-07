@@ -4,6 +4,9 @@ const app = express();
 // la constante port se deja así ya que en caso de tener conflictos con puertos, sólo se modifica la const y no hay que modificar nada más
 const port = 8080;
 
+// usaremos handlebars
+app.set('view engine', 'hbs');
+
 
 // servir contenido estático - middleware
 // la función de abajo indica lo siguiente: llama directamente a la carpeta public para que los archivos html que se encuentren en ella puedan ser utilizados por express mediante las llamadas (app.get | res.send)
@@ -12,8 +15,9 @@ app.use(express.static('public'));
 
 
 // los app get con express sirven para realizar "rutas", esto quiere decir que podemos condicionar las rutas respectivas para nuestra app. como se ve en los ejemplos de abajo, podemos ir personalizando cada enlace, al final hay un comodín ('*') asterisco, que sirve para dejar un mensaje en cualquier ruta que no exista.
-app.get('/hola-mundo', function (req, res) {
-  res.send('Hola Mundo en su respectiva ruta');
+app.get('/', function (req, res) {
+  // ahora se renderizará la vista que está en la carpeta views, especificamente el home.hbs
+  res.render('home')
 });
 
 // llamado al menu generic
@@ -22,7 +26,7 @@ app.get('/generic', function (req, res) {
 });
 
 // llamado al menú elements
-app.get('/generic', function (req, res) {
+app.get('/elements', function (req, res) {
   res.sendFile(__dirname + '/public/elements.html');
 });
 
