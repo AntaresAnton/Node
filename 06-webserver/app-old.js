@@ -21,5 +21,5 @@ http.createServer( (req,res) =>{
     res.end();
 })
 // el listen es para colocar el puerto donde uno "jugará" con la app
-.listen(4000);
-console.log('escuchando en el puerto', 4000);
+.listen(8080);
+console.log('escuchando en el puerto', 8080);
