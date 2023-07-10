@@ -20,14 +20,39 @@ class Server {
     middlewares(){
 
         // directorio publico
+        // en esta carpeta se basará el html o frontend que haya para que se ejecute
+
+        // para saber que son middlewares , en este caso es por que después de app habrá algun método o función seguida de un puntito (sorry la coma separada)
+        // ejemplo = app.use = middleware
         this.app.use(express.static('public'))
 
     }
 
     // las rutas, para que queden ordenadas
     routes() {
-        this.app.get('/', (req, res) => {
-            res.send('Hello World');
+        // información de usuario obtenida correctamente
+        this.app.get('/api', (req, res) => {
+            res.json({
+                msg: 'Get API'
+            });
+        })
+        // info de usuario enviado correctamente
+        this.app.put('/api', (req, res) => {
+            res.json({
+                msg: 'Put API'
+            });
+        })
+        // usuario creado correctamente
+        this.app.post('/api', (req, res) => {
+            res.status(201).json({
+                msg: 'Post API'
+            });
+        })
+        // usuario eliminado correctamente
+        this.app.delete('/api', (req, res) => {
+            res.json({
+                msg: 'Delete API'
+            });
         })
     }
 
