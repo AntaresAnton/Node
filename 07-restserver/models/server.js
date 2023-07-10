@@ -32,31 +32,10 @@ class Server {
     }
 
     // las rutas, para que queden ordenadas
+    // CRUD RUTAS
     routes() {
-        // información de usuario obtenida correctamente
-        this.app.get('/api', (req, res) => {
-            res.json({
-                msg: 'Get API'
-            });
-        })
-        // info de usuario enviado correctamente
-        this.app.put('/api', (req, res) => {
-            res.json({
-                msg: 'Put API'
-            });
-        })
-        // usuario creado correctamente
-        this.app.post('/api', (req, res) => {
-            res.status(201).json({
-                msg: 'Post API'
-            });
-        })
-        // usuario eliminado correctamente
-        this.app.delete('/api', (req, res) => {
-            res.json({
-                msg: 'Delete API'
-            });
-        })
+        // aqui antiguamente estaban los middlewares de ruta . ahora están alojados en el directorio routes/user
+        this.app.use('/api/usuarios', require('../routes/user'));
     }
 
     // método listen, en si, es todo lo que usualmente iba en el archivo principal, pero con la finalidad que quede más ordenado
