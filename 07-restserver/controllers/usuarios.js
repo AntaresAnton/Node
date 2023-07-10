@@ -3,14 +3,16 @@ const { response, request } = require('express');
 // información de usuario obtenida correctamente
 const usuariosGet = (req = request, res = response) => {
 
-    const {q,nombre,apikey} = req.query;
+    const {q,nombre = "NoName",apikey,page = 1,limit = 10} = req.query;
 
 
     res.json({
         msg: 'Get API - Controlador',
         q,
         nombre,
-        apikey
+        apikey,
+        page,
+        limit
     });
 }
 // info de usuario enviado correctamente
