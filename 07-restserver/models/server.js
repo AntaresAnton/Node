@@ -1,5 +1,6 @@
 // librería express
-const express = require('express')
+const express = require('express');
+const cors = require('cors');
 
 class Server {
 
@@ -19,12 +20,14 @@ class Server {
 
     middlewares(){
 
+        // CORS
+        this.app.use(cors());
+
         // directorio publico
         // en esta carpeta se basará el html o frontend que haya para que se ejecute
-
         // para saber que son middlewares , en este caso es por que después de app habrá algun método o función seguida de un puntito (sorry la coma separada)
         // ejemplo = app.use = middleware
-        this.app.use(express.static('public'))
+        this.app.use(express.static('public'));
 
     }
 
