@@ -9,6 +9,9 @@ class Server {
         this.app = express();
         // ecá va a ir el puerto como parámetro fijo
         this.port = process.env.PORT;
+        // para saber las rutas disponibles en el servidor
+        // esto se realiza con el objetivo de optimizar el código
+        this.usuariosPath = '/api/usuarios';
 
         // middlewares
         // los middlewares no son más que funciones que le agregan "otras funcionalidades" al webserver
@@ -23,6 +26,9 @@ class Server {
         // CORS
         this.app.use(cors());
 
+        // lectura y parseo de body
+        this.app.use(express.json());
+
         // directorio publico
         // en esta carpeta se basará el html o frontend que haya para que se ejecute
         // para saber que son middlewares , en este caso es por que después de app habrá algun método o función seguida de un puntito (sorry la coma separada)
@@ -35,7 +41,7 @@ class Server {
     // CRUD RUTAS
     routes() {
         // aqui antiguamente estaban los middlewares de ruta . ahora están alojados en el directorio routes/user
-        this.app.use('/api/usuarios', require('../routes/user'));
+        this.app.use(this.usuariosPath, require('../routes/usuarios'));
     }
 
     // método listen, en si, es todo lo que usualmente iba en el archivo principal, pero con la finalidad que quede más ordenado
