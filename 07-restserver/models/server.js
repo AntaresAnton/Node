@@ -1,6 +1,7 @@
 // librería express
 const express = require('express');
 const cors = require('cors');
+const {dbConnection} = require('../database/config');
 
 class Server {
 
@@ -13,12 +14,19 @@ class Server {
         // esto se realiza con el objetivo de optimizar el código
         this.usuariosPath = '/api/usuarios';
 
+        // conectar a la base de datos / es mongodb por lo que está en la nube :D
+        this.conectarDB();
+
         // middlewares
         // los middlewares no son más que funciones que le agregan "otras funcionalidades" al webserver
         this.middlewares();
 
         // método rutas
         this.routes();
+    }
+
+    async conectarDB(){
+        await dbConnection();
     }
 
     middlewares(){
