@@ -1,4 +1,6 @@
 const { response, request } = require('express');
+// con esto se llama al usuario de la carpeta models
+const Usuario = require('../models/usuario');
 
 // información de usuario obtenida correctamente
 const usuariosGet = (req = request, res = response) => {
@@ -16,15 +18,19 @@ const usuariosGet = (req = request, res = response) => {
     });
 }
 // info de usuario enviado correctamente
-const usuariosPost = (req, res = response) => {
+const usuariosPost = async (req, res = response) => {
 
     // ojo , en la constante de abajo, se realiza un filtro condicional . eso quiere decir que al ingresar más datos de los solicitados, sólo ingresará los que se parametrizaron anteriormente, en este caso, el nombre y la edad. nada más. ahora si necesitamos añadir más datos, sólo se agregan en la desestructuración que está aqui abajito.
-    const { nombre,edad } = req.body;
+    const {nombre,correo,password,rol} = req.body;
+
+    const usuario = new Usuario({nombre, correo, password,rol});
+
+        // para guardar los datos en la DB
+        await usuario.save();
 
     res.status(201).json({
-        msg: 'Post API',
-        nombre,
-        edad
+        // msg: 'Post API - usuarios post',
+        usuario
     });
 }
 // usuario creado correctamente

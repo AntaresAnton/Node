@@ -14,7 +14,8 @@ const dbConnection = async()=>{
             // useFindAndModify: false
         });
         // aviso de conección satisfactoria
-        console.log('Base de datos operativa :D');
+        console.log('')
+        console.log('==== Base de datos operativa :D ====');
 
         // en caso que la conexión falle, lo atrapa el catch
         
