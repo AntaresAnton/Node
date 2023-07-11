@@ -1,6 +1,8 @@
 const { response, request } = require('express');
+const bcryptjs = require ('bcryptjs');
 // con esto se llama al usuario de la carpeta models
 const Usuario = require('../models/usuario');
+const { validationResult } = require('express-validator');
 
 // información de usuario obtenida correctamente
 const usuariosGet = (req = request, res = response) => {
@@ -20,12 +22,33 @@ const usuariosGet = (req = request, res = response) => {
 // info de usuario enviado correctamente
 const usuariosPost = async (req, res = response) => {
 
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(400).json(errors);
+    }
+
     // ojo , en la constante de abajo, se realiza un filtro condicional . eso quiere decir que al ingresar más datos de los solicitados, sólo ingresará los que se parametrizaron anteriormente, en este caso, el nombre y la edad. nada más. ahora si necesitamos añadir más datos, sólo se agregan en la desestructuración que está aqui abajito.
     const {nombre,correo,password,rol} = req.body;
 
     const usuario = new Usuario({nombre, correo, password,rol});
 
-        // para guardar los datos en la DB
+
+    // ahora hay que realizar validaciones
+    // si el correo existe
+    const existeEmail = await Usuario.findOne({correo});
+    if (existeEmail){
+        return res.status(400).json({
+            msg: 'El correo ya está registrado'
+        });
+    }
+
+    // Encriptar contraseña - HASH
+    // el getsaltsync es para generar "vueltas" y de acuerdo a la cantidad de estas, va generando contraseñas más seguras. por defecto viene parametrizado en 10
+    const salt = bcryptjs.genSaltSync();
+    // esto de abajo hace que la contraseña sea encriptada mediante hash
+    usuario.password = bcryptjs.hashSync(password, salt);
+
+    // para guardar los datos en la DB
         await usuario.save();
 
     res.status(201).json({

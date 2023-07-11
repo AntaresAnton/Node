@@ -7,6 +7,7 @@ const { usuariosGet,
         usuariosPatch,
         usuariosDelete
     } = require('../controllers/usuarios');
+const { check } = require('express-validator');
 
 // llamamos a la función
 const router = Router();
@@ -21,7 +22,9 @@ router.get('/', usuariosGet);
 // info de usuario enviado correctamente
 router.put('/:id', usuariosPut);
 // usuario creado correctamente
-router.post('/', usuariosPost);
+router.post('/',[
+    check('correo', 'El correo no es valido').isEmail(),
+], usuariosPost);
 // usuario eliminado correctamente
 router.delete('/', usuariosDelete);
 // ejemplo para que muestre "patch"
