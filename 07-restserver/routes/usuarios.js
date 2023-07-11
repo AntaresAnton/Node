@@ -23,7 +23,11 @@ router.get('/', usuariosGet);
 router.put('/:id', usuariosPut);
 // usuario creado correctamente
 router.post('/',[
+    // se crean middlewares para validación de parámetros
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('password', 'El password es obligatorio  y más de 6 letras').isLength({min: 6}),
     check('correo', 'El correo no es valido').isEmail(),
+    check('rol', 'No es un rol válido').isIn(['ADMIN_ROLE','USER_ROLE'])
 ], usuariosPost);
 // usuario eliminado correctamente
 router.delete('/', usuariosDelete);
