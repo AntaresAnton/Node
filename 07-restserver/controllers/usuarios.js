@@ -30,14 +30,7 @@ const usuariosPost = async (req, res = response) => {
     const usuario = new Usuario({nombre, correo, password,rol});
 
 
-    // ahora hay que realizar validaciones
-    // si el correo existe
-    const existeEmail = await Usuario.findOne({correo});
-    if (existeEmail){
-        return res.status(400).json({
-            msg: 'El correo ya está registrado'
-        });
-    }
+    
 
     // Encriptar contraseña - HASH
     // el getsaltsync es para generar "vueltas" y de acuerdo a la cantidad de estas, va generando contraseñas más seguras. por defecto viene parametrizado en 10
@@ -54,13 +47,25 @@ const usuariosPost = async (req, res = response) => {
     });
 }
 // usuario creado correctamente
-const usuariosPut =  (req, res = response) => {
+const usuariosPut =  async(req, res = response) => {
 
     const id = req.params.id;
+    const { password, google, ...resto } = req.body;
+
+    // TODO validar contra BBDD
+    if (password){
+        // Encriptar contraseña - HASH
+        // el getsaltsync es para generar "vueltas" y de acuerdo a la cantidad de estas, va generando contraseñas más seguras. por defecto viene parametrizado en 10
+        const salt = bcryptjs.genSaltSync();
+        // esto de abajo hace que la contraseña sea encriptada mediante hash
+        resto.password = bcryptjs.hashSync(password, salt);
+    }
+
+    const usuario = await Usuario.findByIdAndUpdate(id, resto);
 
     res.json({
         msg: 'Put API',
-        id
+        usuario
     });
 }
 // usuario eliminado correctamente
