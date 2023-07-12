@@ -1,7 +1,5 @@
 const Role = require('../models/role')
 const Usuario = require('../models/usuario')
-
-
 const esRoleValido = async(rol = '')=>{
     const existeRol = await Role.findOne({rol});
     if (!existeRol){
@@ -22,7 +20,7 @@ const existeUsuarioPorId = async(id)=>{
     // ahora hay que realizar validaciones
     // si el correo existe
     const existeUsuario = await Usuario.findById(id);
-    if (!existeEmail){
+    if (!existeUsuario){
         throw new Error(`El ID no existe: ${id}`);
     }
 }

@@ -5,18 +5,16 @@ const Usuario = require('../models/usuario');
 
 
 // información de usuario obtenida correctamente
-const usuariosGet = (req = request, res = response) => {
+const usuariosGet = async(req = request, res = response) => {
 
-    const {q,nombre = "NoName",apikey,page = 1,limit = 10} = req.query;
-
+    // const {q,nombre = "NoName",apikey,page = 1,limit = 10} = req.query;
+    // con esto se obtiene la lista de usuarios que hayan en la bbdd
+    const usuarios = await Usuario.find()
+    // con el limite de abajo se parametriza la catidad de resultados que quedemos desplegar
+    .limit(2);
 
     res.json({
-        msg: 'Get API - Controlador',
-        q,
-        nombre,
-        apikey,
-        page,
-        limit
+        usuarios
     });
 }
 // info de usuario enviado correctamente
@@ -50,7 +48,7 @@ const usuariosPost = async (req, res = response) => {
 const usuariosPut =  async(req, res = response) => {
 
     const {id} = req.params;
-    const { _id, password, google, ...resto } = req.body;
+    const {_id, password, google, correo, ...resto } = req.body;
 
     // TODO validar contra BBDD
     if (password){
@@ -64,7 +62,7 @@ const usuariosPut =  async(req, res = response) => {
     const usuario = await Usuario.findByIdAndUpdate(id, resto);
 
     res.json({
-        msg: 'Put API - UsuariosPut',
+        // msg: 'Put API - UsuariosPut',
         usuario
     });
 }

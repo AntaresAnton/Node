@@ -25,6 +25,7 @@ const router = Router();
 router.get('/', usuariosGet);
 // info de usuario enviado correctamente
 router.put('/:id',[
+    // condicional para mongodb
     check('id', 'no es un ID Válido').isMongoId(),
     check('id').custom(existeUsuarioPorId),
     check('rol').custom(esRoleValido),
