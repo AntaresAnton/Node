@@ -43,7 +43,11 @@ router.post('/',[
     validarCampos
 ], usuariosPost);
 // usuario eliminado correctamente
-router.delete('/', usuariosDelete);
+router.delete('/:id',[
+    check('id', 'no es un ID Válido').isMongoId(),
+    check('id').custom(existeUsuarioPorId),
+    validarCampos
+], usuariosDelete);
 // ejemplo para que muestre "patch"
 router.patch('/', usuariosPatch);
 

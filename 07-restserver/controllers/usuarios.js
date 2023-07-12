@@ -9,12 +9,30 @@ const usuariosGet = async(req = request, res = response) => {
 
     // const {q,nombre = "NoName",apikey,page = 1,limit = 10} = req.query;
     // con esto se obtiene la lista de usuarios que hayan en la bbdd
-    const usuarios = await Usuario.find()
-    // con el limite de abajo se parametriza la catidad de resultados que quedemos desplegar
-    .limit(2);
+    const { limite = 5, desde = 0} = req.query;
+    // está parametrizado para que arroje 5 en cada consulta. se puede modificar a gusto
+    // con la constante de abajo, podemos indicar parámetros para contabilizar. ejem. ahora se contabilizarán todos los usuarios que estén en estado "true". sería como decir que despliegue los usuarios activos
+    const query = {estado:true};
+    // const usuarios = await Usuario.find(query)
+    // // con el limite de abajo se parametriza la catidad de resultados que quedemos desplegar
+    // .skip(Number(desde))
+    // .limit(Number(limite));
+
+    // const total = await Usuario.countDocuments(query);
+
+    const [total, usuarios] = await Promise.all([
+        Usuario.count(query),
+        Usuario.find(query)
+        // con el limite de abajo se parametriza la catidad de resultados que quedemos desplegar
+            .skip(Number(desde))
+            .limit(Number(limite))
+
+    ]);
 
     res.json({
+        total,
         usuarios
+        // resp
     });
 }
 // info de usuario enviado correctamente
@@ -73,9 +91,17 @@ const usuariosPatch =(req, res = response) => {
     });
 }
 // ejemplo para que muestre "patch"
-const usuariosDelete =(req, res = response) => {
+const usuariosDelete = async (req, res = response) => {
+
+    const {id} = req.params; 
+
+    // fisicamente lo borramos
+    const usuario = await Usuario.findByIdAndDelete(id);
+
     res.json({
-        msg: 'Delete API'
+        msg: 'Usuario eliminado correctamente',
+        // id
+        usuario
     });
 }
 
