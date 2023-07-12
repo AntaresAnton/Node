@@ -1,5 +1,5 @@
 // desestructuramos algunas cosas que vienen de express
-const { esRoleValido, emailExiste } = require('../helpers/db-validators');
+const { esRoleValido, emailExiste, existeUsuarioPorId } = require('../helpers/db-validators');
 const {validarCampos} = require('../middlewares/validar-campos');
 
 
@@ -24,7 +24,12 @@ const router = Router();
 // información de usuario obtenida correctamente
 router.get('/', usuariosGet);
 // info de usuario enviado correctamente
-router.put('/:id', usuariosPut);
+router.put('/:id',[
+    check('id', 'no es un ID Válido').isMongoId(),
+    check('id').custom(existeUsuarioPorId),
+    check('rol').custom(esRoleValido),
+    validarCampos
+], usuariosPut);
 // usuario creado correctamente
 router.post('/',[
     // se crean middlewares para validación de parámetros

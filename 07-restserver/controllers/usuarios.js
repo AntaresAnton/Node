@@ -49,8 +49,8 @@ const usuariosPost = async (req, res = response) => {
 // usuario creado correctamente
 const usuariosPut =  async(req, res = response) => {
 
-    const id = req.params.id;
-    const { password, google, ...resto } = req.body;
+    const {id} = req.params;
+    const { _id, password, google, ...resto } = req.body;
 
     // TODO validar contra BBDD
     if (password){
@@ -64,7 +64,7 @@ const usuariosPut =  async(req, res = response) => {
     const usuario = await Usuario.findByIdAndUpdate(id, resto);
 
     res.json({
-        msg: 'Put API',
+        msg: 'Put API - UsuariosPut',
         usuario
     });
 }
