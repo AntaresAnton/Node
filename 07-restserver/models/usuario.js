@@ -41,4 +41,11 @@ const UsuarioSchema = Schema({
 
 });
 
+// acá se crearán métodos para validar
+// de todas formas, lo que realizará esto, será quitar los campos que en realidad no queremos ver
+UsuarioSchema.methods.toJSON = function(){
+    const {__v, password, ...usuario} = this.toObject();
+    return usuario;
+}
+
 module.exports = model('Usuario', UsuarioSchema);
