@@ -1,0 +1,73 @@
+{
+"correo": "carlitos_lechuga31@gmail.com",
+"nombre": "Carlos Lechuga",
+"password": "Carlos Lechuga",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Tangananica_tanganana@yahoo.es",
+"nombre": "tangananica Nicanica",
+"password": "tangananica Nicanica",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Chayane@outlook.com",
+"nombre": "Elmer Figueroa",
+"password": "Elmer Figueroa",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Jlo_2000@gmail.com",
+"nombre": "Jennifer Lopez",
+"password": "Jennifer Lopez",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Kangseri_4ever@live.cl",
+"Estado": "true",
+"Googke": "false",
+"nombre": "María Pelusa Hernandez",
+"password": "María Pelusa Hernandez",
+"rol": "ADMIN_ROLE"
+}
+
+{
+"correo": "Voldemort666@gmail.com",
+"Estado": "false",
+"Google": "true",
+"nombre": "Tom Riddle",
+"password": "Tom Riddle",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Presley_miranda@outlook.com",
+"nombre": "Meryl Streep",
+"password": "Meryl Streep",
+"rol": "VENTAS_ROLE"
+}
+
+{
+"correo": "Becca_mitchell@gmail.com",
+"nombre": "Anna Kendrick",
+"password": "Anna Kendrick",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Tabletennis_pv@gmail.com",
+"nombre": "Paulina Vega",
+"password": "Paulina Vega",
+"rol": "USER_ROLE"
+}
+
+{
+"correo": "Latelate@outlook.com",
+"nombre": "James Corden",
+"password": "James Corden",
+"rol": "VENTAS_ROLE"
+}

@@ -1,0 +1,2 @@
+PORT=8080
+MONGODB_CNN=mongodb+srv://user_node_examen:IZu6eJjgRCfG2bkx@et-2023.ylqi9bm.mongodb.net/etweb
